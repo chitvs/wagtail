@@ -10,6 +10,22 @@ It is possible to create your own custom reports in the Wagtail admin with two b
 -  `wagtail.admin.views.reports.ReportView` - Provides the basic listing and spreadsheet export functionality without any pre-determined fields.
 -  `wagtail.admin.views.reports.PageReportView` - Extends the `ReportView` and provides a default set of fields suitable for page listings.
 
+## Reporting reference
+
+```{eval-rst}
+.. attribute:: template_name
+...
+.. attribute:: results_template_name
+...
+.. attribute:: page_title
+...
+.. attribute:: header_icon
+...
+.. attribute:: index_url_name
+...
+.. attribute:: index_results_url_name
+```
+
 ## Example report for pages with unpublished changes
 
 For this example, we'll add a report which shows any pages with unpublished changes.
