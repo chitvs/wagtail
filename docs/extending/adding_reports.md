@@ -39,7 +39,7 @@ class UnpublishedChangesReportView(PageReportView):
     index_url_name = "unpublished_changes_report"
     index_results_url_name = "unpublished_changes_report_results"
 ```
-## Defining your report
+### Defining your report
 
 The most important attributes and methods to customize to define your report are:
 
@@ -47,7 +47,7 @@ The most important attributes and methods to customize to define your report are
 .. method:: get_queryset(self)
 ```
 
-This retrieves the queryset of pages for your report. For our example:
+This retrieves the queryset of pages for your report, including both page models and non-page models.
 
 ```python
 # <project>/views.py
@@ -128,7 +128,7 @@ The name of the URL pattern registered for the results view (the report view wit
 
 ```
 
-## Spreadsheet exports
+### Spreadsheet exports
 
 ```{eval-rst}
 
@@ -175,7 +175,7 @@ preprocessing, set the preprocessing_function to ``None``.
 
 ```
 
-## Customizing templates
+### Customizing templates
 
 For this example \"pages with unpublished changes\" report, we'll add an extra column to the listing template, showing the last publication date for each page. To do this, we'll extend two templates: `wagtailadmin/reports/base_page_report_results.html`, and `wagtailadmin/reports/listing/_list_page_report.html`.
 
@@ -215,7 +215,7 @@ Extending `wagtailadmin/reports/base_page_report.html` was changed in favor of e
 
 Finally, we'll set `UnpublishedChangesReportView.results_template_name` to this new template: `'reports/unpublished_changes_report_results.html'`.
 
-## Adding a menu item and admin URL
+### Adding a menu item and admin URL
 
 To add a menu item for your new report to the _Reports_ submenu, you will need to use the `register_reports_menu_item` hook (see: [Register Reports Menu Item](register_reports_menu_item)). To add an admin url for the report, you will need to use the `register_admin_urls` hook (see: [Register Admin URLs](register_admin_urls)). This can be done as follows:
 
@@ -244,7 +244,7 @@ def register_unpublished_changes_report_url():
 
 Here, we use the `AdminOnlyMenuItem` class to ensure our report icon is only shown to superusers. To make the report visible to all users, you could replace this with `MenuItem`.
 
-## Setting up permission restriction
+### Setting up permission restriction
 
 Even with the menu item hidden, it would still be possible for any user to visit the report's URL directly, and so it is necessary to set up a permission restriction on the report view itself. This can be done by adding a `dispatch` method to the existing `UnpublishedChangesReportView` view:
 
@@ -257,7 +257,7 @@ Even with the menu item hidden, it would still be possible for any user to visit
         return super().dispatch(request, *args, **kwargs)
 ```
 
-## The full code
+### The full code
 
 ```python
 # <project>/views.py
