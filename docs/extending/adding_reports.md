@@ -2,12 +2,16 @@
 
 # Adding reports
 
-Reports are views with listings of pages matching a specific query. They can also export these listings in spreadsheet format.
+Reports are views with listings of pages or any non-page model (such as snippets) matching a specific query. Reports can also export these listings in spreadsheet format.
 They are found in the _Reports_ submenu: by default, the _Locked pages_ report is provided, allowing an overview of locked pages on the site.
 
-It is possible to create your own custom reports in the Wagtail admin. Two base classes are provided:
-`wagtail.admin.views.reports.ReportView`, which provides basic listing and spreadsheet export functionality, and
-`wagtail.admin.views.reports.PageReportView`, which additionally provides a default set of fields suitable for page listings.
+It is possible to create your own custom reports in the Wagtail admin with two base classes provided:
+
+-  `wagtail.admin.views.reports.ReportView` - Provides the basic listing and spreadsheet export functionality without any pre-determined fields.
+-  `wagtail.admin.views.reports.PageReportView` - Extends the `ReportView` and provides a default set of fields suitable for page listings.
+
+## Example report for pages with unpublished changes
+
 For this example, we'll add a report which shows any pages with unpublished changes.
 We will register this view using the `unpublished_changes_report` name for the URL pattern.
 
@@ -15,12 +19,10 @@ We will register this view using the `unpublished_changes_report` name for the U
 # <project>/views.py
 from wagtail.admin.views.reports import PageReportView
 
-
 class UnpublishedChangesReportView(PageReportView):
     index_url_name = "unpublished_changes_report"
     index_results_url_name = "unpublished_changes_report_results"
 ```
-
 ## Defining your report
 
 The most important attributes and methods to customize to define your report are:
